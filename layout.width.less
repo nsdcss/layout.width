@@ -1,0 +1,28 @@
+/*------------------------------------*\
+    $WIDTH
+\*------------------------------------*/
+
+// outer loop
+.make-responsive-widths(@counter) when (@counter > 0) {
+	.make-responsive-widths((@counter - 1));    // next iteration
+	@cur-list: extract(@bp__bp-list, @counter);
+	@breakpoint-name:  extract(@cur-list, 1);
+	@breakpoint-width:  extract(@cur-list, 2);
+	@media only screen and (min-width:~"@{breakpoint-width}px") {
+		.set-modified-widths(length(@u__width-list), ~"--@{breakpoint-name}");
+	}
+}
+
+// inner loop
+.set-modified-widths(@counter, @bpClass: ~'') when (@counter > 0) {
+	.set-modified-widths((@counter - 1), @bpClass); // next iteration
+	@cur-list: extract(@u__width-list, @counter);
+	@cur-width-name: extract(@cur-list, 1);
+	@cur-width-value: extract(@cur-list, 2);
+	.@{cf__framework-prefix}width--@{cur-width-name}@{bpClass} {
+		width: @cur-width-value;
+	}
+}
+
+.set-modified-widths(length(@u__width-list));
+.make-responsive-widths(length(@bp__bp-list)); // launch the loop
