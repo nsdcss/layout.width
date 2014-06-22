@@ -5,6 +5,6 @@
   "author": "Nikolaj Sokolowski",
   "license": "MIT",
   "dependencies": {
-    "nsdcss-core-variables": "https://github.com/nsdcss/core.variables.git",
+    "nsdcss-core-variables": "https://github.com/nsdcss/core.variables.git"
   }
 }
